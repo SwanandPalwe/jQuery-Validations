@@ -42,6 +42,10 @@
                         required: true,
                         email: true,
                         customemail: true
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 19
                     }
                 },
                 messages: {
@@ -66,6 +70,10 @@
                         required: "Please enter an email address",
                         email: "Please enter a valid email address",
                         customemail: "Please enter a valid email address"
+                    },
+                    phone: {
+                        required: "Please enter your phone number",
+                        minlength: "Your password must be 10 digits long"
                     }
                 },
                 errorElement: "span",
@@ -137,6 +145,12 @@
                         <label class="col-sm-12 col-md-4 control-label" for="email">Email:</label>
                         <div class="col-sm-12 col-md-8 control-input">
                             <input type="email" class="form-control" placeholder="Enter Email Address" id="email" name="email">
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="phone">Phone:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="tel" class="form-control" placeholder="Enter Phone Number" id="phone" name="phone">
                         </div>
                     </div>
                     <div class="form-group">
