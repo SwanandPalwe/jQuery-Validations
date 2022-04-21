@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $.validator.setDefaults( {
+			submitHandler: function () {
+				// var btn = $('#signup_btn');
+                // btn.val("Processing...");
+                // btn.attr("disabled",true);
+			}
+		} );
+        $(document).ready(function(){
+            //alert(1);
+            $("#signupform").validate({
+                rules: {
+                    firstname: {
+                        required: true,
+                        minlength: 2,
+                    },
+                    lastname: {
+                        required: true,
+                        minlength: 2,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8,
+                    },
+                    cpassword: {
+                        required: true,
+                        minlength: 8,
+                        equalTo: "#password"
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        customemail: true
+                    }
+                },
+                messages: {
+                    firstname: {
+                        required: "Please enter your Firstname",
+                        minlength: "Minimum character must be 2"
+                    },
+                    lastname: {
+                        required: "Please enter your Lastname",
+                        minlength: "Minimum character must be 2"
+                    },
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be 8 characters long"
+                    },
+                    cpassword: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be 8 characters long",
+                        equalTo: "Please provide the same password as above"
+                    },
+                    email: {
+                        required: "Please enter an email address",
+                        email: "Please enter a valid email address",
+                        customemail: "Please enter a valid email address"
+                    }
+                },
+                errorElement: "span",
+                errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+                highlight: function(element, errorClass, validClass){
+                    $(element).parent(".control-input").addClass("has-error").removeClass("has-success");
+                },
+                unhighlight: function(element, errorClass, validClass){
+                    $(element).parent(".control-input").addClass("has-success").removeClass("has-error");
+                }
+            });
+        });
+    </script>
+    <style>
+        .help-block{color: #a94442;font-size: 14px; font-style: italic;}
+        .has-error .form-control {border-color: #a94442;}
+        .form-control{box-shadow: none !important;}
+        
+        
+        
+        @media screen and (min-width:768px){
+            #signupform .form-group .control-label{font-weight: 600; text-align: right;}
+            #signupform .form-group{display: -ms-flexbox!important; display: flex!important;}
+            #signupform .form-group .control-label, .signupform .form-group .col-sm-12 col-md-8{ -ms-flex: 1 1 auto!important; flex: 1 1 auto!important; }
+        }        
+
+    </style>
+</head>
+<body>
+    <p class="text-center"><a href="https://jqueryvalidation.org/" target="_blank">jquery validation reference</a></p>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-12 col-md-8">
+                <form name="signupform" id="signupform" method="post"  class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="firstname">First Name:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="text" class="form-control" placeholder="Enter First Name" id="firstname" name="firstname" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="lastname">Last Name:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="text" class="form-control" placeholder="Enter Last Name" id="lastname" name="lastname" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="password">Password:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="password" class="form-control" placeholder="Enter Password" id="password" name="password" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="cpassword">Confirm Password:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="password" class="form-control" placeholder="Enter Confirm Password" id="cpassword" name="cpassword" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="email">Email:</label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input type="email" class="form-control" placeholder="Enter Email Address" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-md-4 control-label" for="signup_btn"></label>
+                        <div class="col-sm-12 col-md-8 control-input">
+                            <input id="signup_btn" type="submit" class="btn btn-primary" name="signup1" value="Sign up">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
