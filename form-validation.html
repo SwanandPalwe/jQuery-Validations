@@ -19,6 +19,9 @@
 		} );
         $(document).ready(function(){
             //alert(1);
+            $.validator.addMethod('customphone', function (value, element) {
+                return this.optional(element) || /^\d{10}/.test(value);
+            }, "Please enter a valid phone number");
             $("#signupform").validate({
                 rules: {
                     firstname: {
@@ -45,7 +48,7 @@
                     },
                     phone: {
                         required: true,
-                        minlength: 10
+                        customphone: true
                     }
                 },
                 messages: {
